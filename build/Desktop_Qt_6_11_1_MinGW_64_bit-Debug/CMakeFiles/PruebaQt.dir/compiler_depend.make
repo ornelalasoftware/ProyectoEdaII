@@ -146,6 +146,7 @@ CMakeFiles/PruebaQt.dir/PruebaQt_autogen/mocs_compilation.cpp.obj: PruebaQt_auto
   C:/Qt/6.11.1/mingw_64/include/QtGui/qimage.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpixelformat.h \
@@ -160,9 +161,11 @@ CMakeFiles/PruebaQt.dir/PruebaQt_autogen/mocs_compilation.cpp.obj: PruebaQt_auto
   C:/Qt/6.11.1/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmenu.h \
@@ -673,6 +676,7 @@ CMakeFiles/PruebaQt.dir/main.cpp.obj: C:/Users/Yo/Documents/PruebaQt/main.cpp \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qinputmethod.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpixelformat.h \
@@ -688,10 +692,12 @@ CMakeFiles/PruebaQt.dir/main.cpp.obj: C:/Users/Yo/Documents/PruebaQt/main.cpp \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qapplication.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmenu.h \
@@ -1114,6 +1120,7 @@ CMakeFiles/PruebaQt.dir/mainwindow.cpp.obj: C:/Users/Yo/Documents/PruebaQt/mainw
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsTextItem \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsView \
@@ -1984,6 +1991,8 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/allo
 
 C:/Qt/6.11.1/mingw_64/include/QtGui/qpaintdevice.h:
 
+C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h:
+
 C:/Qt/6.11.1/mingw_64/include/QtGui/qpalette.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/gthr.h:
@@ -2032,11 +2041,17 @@ C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/version:
 
 C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h:
 
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem:
+
 C:/Users/Yo/Documents/PruebaQt/mainwindow.cpp:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu:
+
+C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h:
+
+C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h:
 
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator:
 
@@ -2400,10 +2415,6 @@ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QStatusBar:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
 
-C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h:
-
-C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/crtdefs.h:
-
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/errno.h:
 
 C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/stdlib.h:
@@ -2479,8 +2490,6 @@ C:/Qt/6.11.1/mingw_64/include/QtGui/QPen:
 C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream:
 
 C:/Qt/6.11.1/mingw_64/include/QtGui/qpainter.h:
-
-C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h:
 
 C:/Qt/6.11.1/mingw_64/include/QtWidgets/qpushbutton.h:
 

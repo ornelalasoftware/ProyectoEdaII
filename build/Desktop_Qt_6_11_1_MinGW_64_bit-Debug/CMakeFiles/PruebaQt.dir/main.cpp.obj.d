@@ -394,6 +394,9 @@ CMakeFiles/PruebaQt.dir/main.cpp.obj: \
  C:\Users\Yo\Documents\PruebaQt\sistemagestionlogistico.h \
  C:\Users\Yo\Documents\PruebaQt\grafo.h \
  C:\Users\Yo\Documents\PruebaQt\ciudad.h \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem \
+ C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
+ C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QApplication \
  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qapplication.h \
  C:/Qt/6.11.1/mingw_64/include/QtCore/qcoreapplication.h \

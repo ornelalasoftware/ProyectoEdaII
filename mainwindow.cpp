@@ -134,29 +134,54 @@ MainWindow::MainWindow(QWidget *parent)
     // RUTAS
     // =====================================
 
-    escena->addLine(CP_X, CP_Y,
-                    CC_X, CC_Y);
+    ruta_CP_CC =
+        escena->addLine(
+            CP_X, CP_Y,
+            CC_X, CC_Y
+            );
 
-    escena->addLine(CC_X, CC_Y,
-                    VM_X, VM_Y);
+    ruta_CC_VM =
+        escena->addLine(
+            CC_X, CC_Y,
+            VM_X, VM_Y
+            );
 
-    escena->addLine(CC_X, CC_Y,
-                    BV_X, BV_Y);
+    ruta_CC_BV =
+        escena->addLine(
+            CC_X, CC_Y,
+            BV_X, BV_Y
+            );
 
-    escena->addLine(VM_X, VM_Y,
-                    BV_X, BV_Y);
+    ruta_VM_BV =
+        escena->addLine(
+            VM_X, VM_Y,
+            BV_X, BV_Y
+            );
 
-    escena->addLine(VM_X, VM_Y,
-                    RC_X, RC_Y);
+    ruta_VM_RC =
+        escena->addLine(
+            VM_X, VM_Y,
+            RC_X, RC_Y
+            );
 
-    escena->addLine(RC_X, RC_Y,
-                    BV_X, BV_Y);
+    ruta_RC_BV =
+        escena->addLine(
+            RC_X, RC_Y,
+            BV_X, BV_Y
+            );
 
-    escena->addLine(RC_X, RC_Y,
-                    CP_X, CP_Y);
+    ruta_RC_CP =
+        escena->addLine(
+            RC_X, RC_Y,
+            CP_X, CP_Y
+            );
 
-    escena->addLine(BV_X, BV_Y,
-                    SF_X, SF_Y);
+    ruta_BV_SF =
+        escena->addLine(
+            BV_X, BV_Y,
+            SF_X, SF_Y
+            );
+
 
     // =====================================
     // CIUDADES
@@ -209,6 +234,102 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::resetearRutas()
+{
+    QPen negro(Qt::black);
+    negro.setWidth(2);
+
+    ruta_CP_CC->setPen(negro);
+    ruta_CC_VM->setPen(negro);
+    ruta_CC_BV->setPen(negro);
+    ruta_VM_BV->setPen(negro);
+    ruta_VM_RC->setPen(negro);
+    ruta_RC_BV->setPen(negro);
+    ruta_RC_CP->setPen(negro);
+    ruta_BV_SF->setPen(negro);
+}
+
+
+//PINTAR RUTA OPTIMA
+void MainWindow::pintarRutaOptima(const ResultadoRuta& resultado)
+{
+    resetearRutas();
+
+    QPen verde(Qt::green);
+    verde.setWidth(4);
+
+    for(int i = 0; i < resultado.cantidadCiudades - 1; i++)
+    {
+        int origen = resultado.camino[i];
+        int destino = resultado.camino[i + 1];
+
+        if(
+            (origen == 0 && destino == 1) ||
+            (origen == 1 && destino == 0)
+            )
+        {
+            ruta_CP_CC->setPen(verde);
+        }
+
+        else if(
+            (origen == 0 && destino == 2) ||
+            (origen == 2 && destino == 0)
+            )
+        {
+            ruta_CC_VM->setPen(verde);
+        }
+
+        else if(
+            (origen == 0 && destino == 4) ||
+            (origen == 4 && destino == 0)
+            )
+        {
+            ruta_CC_BV->setPen(verde);
+        }
+
+        else if(
+            (origen == 2 && destino == 4) ||
+            (origen == 4 && destino == 2)
+            )
+        {
+            ruta_VM_BV->setPen(verde);
+        }
+
+        else if(
+            (origen == 2 && destino == 3) ||
+            (origen == 3 && destino == 2)
+            )
+        {
+            ruta_VM_RC->setPen(verde);
+        }
+
+        else if(
+            (origen == 3 && destino == 4) ||
+            (origen == 4 && destino == 3)
+            )
+        {
+            ruta_RC_BV->setPen(verde);
+        }
+
+        else if(
+            (origen == 3 && destino == 1) ||
+            (origen == 1 && destino == 3)
+            )
+        {
+            ruta_RC_CP->setPen(verde);
+        }
+
+        else if(
+            (origen == 4 && destino == 5) ||
+            (origen == 5 && destino == 4)
+            )
+        {
+            ruta_BV_SF->setPen(verde);
+        }
+    }
+}
+
 void MainWindow::on_pushButton_5_clicked()
 {
     if(origenSeleccionado == -1 ||
@@ -222,6 +343,8 @@ void MainWindow::on_pushButton_5_clicked()
             origenSeleccionado,
             destinoSeleccionado
             );
+
+    pintarRutaOptima(resultado);
 
 
     QString texto;
@@ -248,6 +371,9 @@ void MainWindow::on_pushButton_5_clicked()
         );
     texto += " km";
 
+
     ui->textEditResultado->setText(texto);
+
+
 }
 

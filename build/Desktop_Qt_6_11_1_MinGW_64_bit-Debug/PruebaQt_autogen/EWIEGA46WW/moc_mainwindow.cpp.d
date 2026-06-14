@@ -141,6 +141,7 @@ C:/Users/Yo/Documents/PruebaQt/build/Desktop_Qt_6_11_1_MinGW_64_bit-Debug/Prueba
   C:/Qt/6.11.1/mingw_64/include/QtGui/qimage.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.11.1/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpalette.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qpixelformat.h \
@@ -155,9 +156,11 @@ C:/Users/Yo/Documents/PruebaQt/build/Desktop_Qt_6_11_1_MinGW_64_bit-Debug/Prueba
   C:/Qt/6.11.1/mingw_64/include/QtGui/qtransform.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.11.1/mingw_64/include/QtGui/qwindowdefs_win.h \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsLineItem \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/QMenu \
+  C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsitem.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmainwindow.h \
   C:/Qt/6.11.1/mingw_64/include/QtWidgets/qmenu.h \
