@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QGraphicsScene>
-#include "sistemagestionlogistico.h"
 #include <QGraphicsLineItem>
+#include <fstream>
+
+#include "sistemagestionlogistico.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,12 +23,17 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+    void resetearRutas();
+    void pintarRutaOptima(const ResultadoRuta& resultado);
+    void actualizarAlertasReales();
+
 private slots:
     void on_pushButton_5_clicked(); // Calcular ruta
     void on_pushButton_clicked();   // Agregar Ciudad
     void on_pushButton_2_clicked(); // Agregar Ruta
     void on_pushButton_3_clicked(); // Cortar Ruta
     void on_pushButton_4_clicked(); // Mostrar Historial
+    //  void on_pushButton_6_clicked();    // Ver mapa de IDs
 
 private:
     Ui::MainWindow *ui;
@@ -45,9 +52,6 @@ private:
 
     int origenSeleccionado = -1;
     int destinoSeleccionado = -1;
-
-    void resetearRutas();
-    void pintarRutaOptima(const ResultadoRuta& resultado);
 };
 
 #endif // MAINWINDOW_H

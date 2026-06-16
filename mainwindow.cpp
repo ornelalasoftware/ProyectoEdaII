@@ -21,7 +21,55 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // Valores por defecto para evitar cálculos con datos basura
+   //apariencia oscura dark
+    this->setStyleSheet(
+        // Fondo de la ventana principal
+        "QMainWindow { background-color: #1E1E24; }"
+
+        // Estilo general para todos los botones del panel
+        "QPushButton { "
+        "   background-color: #2A2D34; "
+        "   color: #EAEAEA; "
+        "   border: 2px solid #4A4E59; "
+        "   border-radius: 6px; "
+        "   padding: 6px 12px; "
+        "   font-weight: bold; "
+        "   font-family: 'Segoe UI'; "
+        "   font-size: 11px; "
+        "}"
+        "QPushButton:hover { background-color: #3F444E; border-color: #00B4D8; }"
+        "QPushButton:pressed { background-color: #0077B6; }"
+
+        // Estilo para el botón principal "Calcular Ruta"
+        "QPushButton#pushButton_5 { "
+        "   background-color: #0096C7; "
+        "   color: #FFFFFF; "
+        "   border: 1px solid #03045E; "
+        "   font-size: 12px; "
+        "}"
+        "QPushButton#pushButton_5:hover { background-color: #00B4D8; }"
+
+        // Cuadro de texto resultados
+        "QTextEdit { "
+        "   background-color: #121214; "
+        "   color: #00F5D4; "
+        "   border: 2px solid #2A2D34; "
+        "   border-radius: 8px; "
+        "   font-family: 'Consolas', 'Courier New'; "
+        "   font-size: 11px; "
+        "   padding: 8px; "
+        "}"
+
+        // Estilo de etiquetas de texto flotantes
+        "QLabel { "
+        "   color: #EAEAEA; "
+        "   font-family: 'Segoe UI'; "
+        "   font-size: 11px; "
+        "   font-weight: bold; "
+        "}"
+    );
+
+    // evitar cálculos con datos basura
     origenSeleccionado = -1;
     destinoSeleccionado = -1;
 
@@ -31,47 +79,62 @@ MainWindow::MainWindow(QWidget *parent)
     // MENU CIUDAD ORIGEN
 
     QMenu *ciudadOrigen = new QMenu(this);
-    ciudadOrigen->addAction("Cordoba Capital");
-    ciudadOrigen->addAction("Villa Carlos Paz");
-    ciudadOrigen->addAction("Villa Maria");
-    ciudadOrigen->addAction("Rio Cuarto");
-    ciudadOrigen->addAction("Bell Ville");
-    ciudadOrigen->addAction("San Francisco");
+
+    // Carga dinámica basada en el estado actual del backend
+    int totalCiudadesInicial = sistema.getCantidadCiudades();
+    if (totalCiudadesInicial > 0) {
+        for (int i = 0; i < totalCiudadesInicial; i++) {
+            ciudadOrigen->addAction(QString::fromStdString(sistema.obtenerNombreCiudad(i)));
+        }
+    } else {
+        ciudadOrigen->addAction("Cordoba Capital");
+        ciudadOrigen->addAction("Villa Carlos Paz");
+        ciudadOrigen->addAction("Villa Maria");
+        ciudadOrigen->addAction("Rio Cuarto");
+        ciudadOrigen->addAction("Bell Ville");
+        ciudadOrigen->addAction("San Francisco");
+    }
 
     ui->ButtonCiudadOrigen->setMenu(ciudadOrigen);
     ui->ButtonCiudadOrigen->setPopupMode(QToolButton::InstantPopup);
 
     connect(ciudadOrigen, &QMenu::triggered, this, [=](QAction *accion) {
         ui->ButtonCiudadOrigen->setText(accion->text());
-        if(accion->text() == "Cordoba Capital")       origenSeleccionado = 0;
-        else if(accion->text() == "Villa Carlos Paz") origenSeleccionado = 1;
-        else if(accion->text() == "Villa Maria")      origenSeleccionado = 2;
-        else if(accion->text() == "Bell Ville")       origenSeleccionado = 3;
-        else if(accion->text() == "Rio Cuarto")       origenSeleccionado = 4;
-        else if(accion->text() == "San Francisco")    origenSeleccionado = 5;
+        for (int i = 0; i < sistema.getCantidadCiudades(); i++) {
+            if (accion->text() == QString::fromStdString(sistema.obtenerNombreCiudad(i))) {
+                origenSeleccionado = i;
+                break;
+            }
+        }
     });
 
     // MENU CIUDAD DESTINO
 
     QMenu *ciudadDestino = new QMenu(this);
-    ciudadDestino->addAction("Cordoba Capital");
-    ciudadDestino->addAction("Villa Carlos Paz");
-    ciudadDestino->addAction("Villa Maria");
-    ciudadDestino->addAction("Rio Cuarto");
-    ciudadDestino->addAction("Bell Ville");
-    ciudadDestino->addAction("San Francisco");
+    if (totalCiudadesInicial > 0) {
+        for (int i = 0; i < totalCiudadesInicial; i++) {
+            ciudadDestino->addAction(QString::fromStdString(sistema.obtenerNombreCiudad(i)));
+        }
+    } else {
+        ciudadDestino->addAction("Cordoba Capital");
+        ciudadDestino->addAction("Villa Carlos Paz");
+        ciudadDestino->addAction("Villa Maria");
+        ciudadDestino->addAction("Rio Cuarto");
+        ciudadDestino->addAction("Bell Ville");
+        ciudadDestino->addAction("San Francisco");
+    }
 
     ui->ButtonCiudadDestino->setMenu(ciudadDestino);
     ui->ButtonCiudadDestino->setPopupMode(QToolButton::InstantPopup);
 
     connect(ciudadDestino, &QMenu::triggered, this, [=](QAction *accion) {
         ui->ButtonCiudadDestino->setText(accion->text());
-        if(accion->text() == "Cordoba Capital")       destinoSeleccionado = 0;
-        else if(accion->text() == "Villa Carlos Paz") destinoSeleccionado = 1;
-        else if(accion->text() == "Villa Maria")      destinoSeleccionado = 2;
-        else if(accion->text() == "Bell Ville")       destinoSeleccionado = 3;
-        else if(accion->text() == "Rio Cuarto")       destinoSeleccionado = 4;
-        else if(accion->text() == "San Francisco")    destinoSeleccionado = 5;
+        for (int i = 0; i < sistema.getCantidadCiudades(); i++) {
+            if (accion->text() == QString::fromStdString(sistema.obtenerNombreCiudad(i))) {
+                destinoSeleccionado = i;
+                break;
+            }
+        }
     });
 
 
@@ -84,12 +147,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsViewMapa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsViewMapa->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    // Intentamos renderizar a la imagen real
+    // Intentamos renderizar a la imagen real, realmente lo intentamossssss
     QPixmap mapaFondo("mapacordoba.jfif");
     if (!mapaFondo.isNull()) {
         escena->setBackgroundBrush(mapaFondo.scaled(491, 341, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     } else {
-        escena->setBackgroundBrush(QBrush(QColor("#EAEAEA"))); // Fondo de auxilio gris claro
+        escena->setBackgroundBrush(QBrush(QColor(0xEAEAEA))); // Fondo de auxilio gris claro (CORREGIDO CLAZY)
     }
 
     // COORDENADAS AJUSTADAS AL MAPA REAL
@@ -103,13 +166,14 @@ MainWindow::MainWindow(QWidget *parent)
 
     // NODOS Y ARISTAS
 
-    QPen borde(QColor("#1A1D24"));
+    QPen borde(QColor(0x1A1D24)); // CORREGIDO CLAZY
     borde.setWidth(1);
-    QPen penRutas(QColor("#4A5568")); // Rutas en gris
+    QPen penRutas(QColor(0x4A5568)); // Rutas en gris (CORREGIDO CLAZY)
     penRutas.setWidth(3);
-    QBrush relleno(QColor("#D90429")); // Nodos en rojo
+    QBrush relleno(QColor(0xD90429)); // Nodos en rojo (CORREGIDO CLAZY)
 
     // Trazado de lineas logisticas
+
     ruta_CP_CC = escena->addLine(CP_X, CP_Y, CC_X, CC_Y, penRutas);
     ruta_CC_VM = escena->addLine(CC_X, CC_Y, VM_X, VM_Y, penRutas);
     ruta_CC_BV = escena->addLine(CC_X, CC_Y, BV_X, BV_Y, penRutas);
@@ -124,39 +188,41 @@ MainWindow::MainWindow(QWidget *parent)
     // Pinta los nodos y pone las ciudades
     escena->addEllipse(CP_X - 6, CP_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtCP = escena->addText("Carlos Paz");
-    txtCP->setDefaultTextColor(QColor("#111111"));
+    txtCP->setDefaultTextColor(QColor(0x111111));
     txtCP->setFont(fontCiudades);
     txtCP->setPos(CP_X - 65, CP_Y - 20);
 
     escena->addEllipse(CC_X - 6, CC_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtCC = escena->addText("Cordoba Capital");
-    txtCC->setDefaultTextColor(QColor("#111111"));
+    txtCC->setDefaultTextColor(QColor(0x111111));
     txtCC->setFont(fontCiudades);
     txtCC->setPos(CC_X - 45, CC_Y - 20);
 
     escena->addEllipse(VM_X - 6, VM_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtVM = escena->addText("Villa Maria");
-    txtVM->setDefaultTextColor(QColor("#111111"));
+    txtVM->setDefaultTextColor(QColor(0x111111));
     txtVM->setFont(fontCiudades);
     txtVM->setPos(VM_X + 10, VM_Y - 10);
 
     escena->addEllipse(RC_X - 6, RC_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtRC = escena->addText("Rio Cuarto");
-    txtRC->setDefaultTextColor(QColor("#111111"));
+    txtRC->setDefaultTextColor(QColor(0x111111));
     txtRC->setFont(fontCiudades);
     txtRC->setPos(RC_X - 65, RC_Y - 5);
 
     escena->addEllipse(BV_X - 6, BV_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtBV = escena->addText("Bell Ville");
-    txtBV->setDefaultTextColor(QColor("#111111"));
+    txtBV->setDefaultTextColor(QColor(0x111111));
     txtBV->setFont(fontCiudades);
     txtBV->setPos(BV_X + 10, BV_Y - 10);
 
     escena->addEllipse(SF_X - 6, SF_Y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txtSF = escena->addText("San Francisco");
-    txtSF->setDefaultTextColor(QColor("#111111"));
+    txtSF->setDefaultTextColor(QColor(0x111111));
     txtSF->setFont(fontCiudades);
     txtSF->setPos(SF_X - 35, SF_Y - 20);
+
+    actualizarAlertasReales();
 }
 
 MainWindow::~MainWindow()
@@ -166,24 +232,56 @@ MainWindow::~MainWindow()
 
 void MainWindow::resetearRutas()
 {
-    QPen normal(QColor("#4A5568"));
+    // Gris para normal, Rojo para corte
+    QPen normal(QColor(0x4A5568)); // Gris original
     normal.setWidth(3);
 
-    ruta_CP_CC->setPen(normal);
-    ruta_CC_VM->setPen(normal);
-    ruta_CC_BV->setPen(normal);
-    ruta_VM_BV->setPen(normal);
-    ruta_VM_RC->setPen(normal);
-    ruta_RC_BV->setPen(normal);
-    ruta_RC_CP->setPen(normal);
-    ruta_BV_SF->setPen(normal);
+    QPen cortada(QColor(0xD90429)); // Rojo
+    cortada.setWidth(4); // más gruesa para que resalte el bloqueo
+
+    //la referencia segura del grafo
+    auto& miGrafo = sistema.getGrafo();
+
+    // Validamos cada tramo individualmente consultando el backend (peso > 9999)
+
+    // Carlos Paz ➔ Córdoba (1 a 0)
+    if (miGrafo.obtenerPeso(1, 0) > 9999.0f) ruta_CP_CC->setPen(cortada);
+    else ruta_CP_CC->setPen(normal);
+
+    // Córdoba ➔ Villa María (0 a 2)
+    if (miGrafo.obtenerPeso(0, 2) > 9999.0f) ruta_CC_VM->setPen(cortada);
+    else ruta_CC_VM->setPen(normal);
+
+    // Córdoba ➔ Bell Ville (0 a 3)
+    if (miGrafo.obtenerPeso(0, 3) > 9999.0f) ruta_CC_BV->setPen(cortada);
+    else ruta_CC_BV->setPen(normal);
+
+    // Villa María ➔ Bell Ville (2 a 3)
+    if (miGrafo.obtenerPeso(2, 3) > 9999.0f) ruta_VM_BV->setPen(cortada);
+    else ruta_VM_BV->setPen(normal);
+
+    // Villa María ➔ Río Cuarto (2 a 4)
+    if (miGrafo.obtenerPeso(2, 4) > 9999.0f) ruta_VM_RC->setPen(cortada);
+    else ruta_VM_RC->setPen(normal);
+
+    // Río Cuarto ➔ Bell Ville (4 a 3)
+    if (miGrafo.obtenerPeso(4, 3) > 9999.0f) ruta_RC_BV->setPen(cortada);
+    else ruta_RC_BV->setPen(normal);
+
+    // Río Cuarto ➔ Carlos Paz (4 a 1)
+    if (miGrafo.obtenerPeso(4, 1) > 9999.0f) ruta_RC_CP->setPen(cortada);
+    else ruta_RC_CP->setPen(normal);
+
+    // Bell Ville ➔ San Francisco (3 a 5)
+    if (miGrafo.obtenerPeso(3, 5) > 9999.0f) ruta_BV_SF->setPen(cortada);
+    else ruta_BV_SF->setPen(normal);
 }
 
 void MainWindow::pintarRutaOptima(const ResultadoRuta& resultado)
 {
     resetearRutas();
 
-    QPen azulLogistico(QColor("#0077B6")); // Lz línea azul para marcar el trayecto óptimo
+    QPen azulLogistico(QColor(0x0077B6)); // Lz línea azul para marcar el trayecto óptimo
     azulLogistico.setWidth(5);
 
     for(int i = 0; i < resultado.cantidadCiudades - 1; i++)
@@ -233,6 +331,8 @@ void MainWindow::on_pushButton_5_clicked()
 
     texto += "\n\nDistancia total: " + QString::number(resultado.distanciaTotal) + " km";
     ui->textEditResultado->setText(texto);
+
+    actualizarAlertasReales();
 }
 
 // BOTÓN: AGREGAR CIUDAD
@@ -259,13 +359,13 @@ void MainWindow::on_pushButton_clicked()
     sistema.guardarDatos(); // Guarda en el ciudades.dat automáticamente
 
     // Dibuja el nuevo nodo en el mapa al instante
-    QPen borde(QColor("#1A1D24"));
+    QPen borde(QColor(0x1A1D24));
     borde.setWidth(1);
-    QBrush relleno(QColor("#D90429")); // Rojo
+    QBrush relleno(QColor(0xD90429)); // Rojo
 
     escena->addEllipse(x - 6, y - 6, 12, 12, borde, relleno);
     QGraphicsTextItem* txt = escena->addText(nombre);
-    txt->setDefaultTextColor(QColor("#111111"));
+    txt->setDefaultTextColor(QColor(0x111111));
     QFont fontCiudades("Segoe UI", 8, QFont::Bold);
     txt->setFont(fontCiudades);
     txt->setPos(x + 10, y - 10);
@@ -277,50 +377,71 @@ void MainWindow::on_pushButton_clicked()
     QMessageBox::information(this, "Éxito", "Ciudad '" + nombre + "' agregada y guardada correctamente.");
 }
 
-// BOTÓN: AGREGAR RUTA
+// BOTÓN: AGREGAR RUTA (Conectar ciudades)
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    // Primero LE MOSTRAMOS PRIMERO LA LISTA DE IDs PARA QUE SEPA QUÉ PONER
+    QString guiaIds = "=== GUÍA DE IDs DE CIUDADES ===\n\n";
+    int total = sistema.getCantidadCiudades();
+    for (int i = 0; i < total; i++) {
+        guiaIds += QString::number(i) + " ➔ " + QString::fromStdString(sistema.obtenerNombreCiudad(i)) + "\n";
+    }
+
+    QMessageBox::information(this, "¡Atención!", "Antes de continuar, memorice o anote los IDs de las ciudades que quiere conectar:\n\n" + guiaIds);
+
+    // AHORA SÍ, PEDIMOS LOS DATOS
     bool ok;
-    // Pedimos ID de origen y destino por número
     int origen = QInputDialog::getInt(this, "Nueva Ruta",
-                                      "ID Ciudad Origen (Ej: 0 para Córdoba):", 0, 0, 50, 1, &ok);
+                                      "ID Ciudad Origen:", 0, 0, total - 1, 1, &ok);
     if (!ok) return;
 
     int destino = QInputDialog::getInt(this, "Nueva Ruta",
-                                       "ID Ciudad Destino:", 1, 0, 50, 1, &ok);
+                                       "ID Ciudad Destino:", 1, 0, total - 1, 1, &ok);
     if (!ok) return;
 
     float km = QInputDialog::getDouble(this, "Nueva Ruta",
                                        "Distancia en Kilómetros (km):", 100.0, 1.0, 2000.0, 1, &ok);
     if (!ok) return;
 
+    // Registra en el backend
     sistema.agregarRuta(origen, destino, km);
-
     QMessageBox::information(this, "Éxito", "Ruta conectada con éxito en el backend.");
 }
 
-// BOTÓN: CORTAR RUTA
+// BOTÓN: CORTAR RUTA (Bloqueo de caminos)
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    // PRIMERO LA LISTA DE IDs PARA QUE SEPA QUÉ CORTAR
+    QString guiaIds = "=== GUÍA DE IDs DE CIUDADES ===\n\n";
+    int total = sistema.getCantidadCiudades();
+    for (int i = 0; i < total; i++) {
+        guiaIds += QString::number(i) + " ➔ " + QString::fromStdString(sistema.obtenerNombreCiudad(i)) + "\n";
+    }
+
+    QMessageBox::warning(this, "¡Atención!", "Antes de continuar, verifique los IDs de las ciudades cuya ruta quiere bloquear:\n\n" + guiaIds);
+
+    // AHORA SÍ, PEDIMOS LOS DATOS PARA CORTAR
     bool ok;
     int origen = QInputDialog::getInt(this, "Cortar Ruta",
-                                      "ID Ciudad Origen:", 0, 0, 50, 1, &ok);
+                                      "ID Ciudad Origen:", 0, 0, total - 1, 1, &ok);
     if (!ok) return;
 
     int destino = QInputDialog::getInt(this, "Cortar Ruta",
-                                       "ID Ciudad Destino:", 1, 0, 50, 1, &ok);
+                                       "ID Ciudad Destino:", 1, 0, total - 1, 1, &ok);
     if (!ok) return;
 
+    // Desconectamos en el backend
     sistema.cortarRuta(origen, destino);
 
-    // Resetea el mapa para mostrar que el camino ya no está disponible
+    // Reseteamos visualmente el mapa por seguridad
     resetearRutas();
 
-    QMessageBox::warning(this, "Ruta Cortada", "El camino entre los IDs seleccionados ha sido bloqueado.");
-}
+    QMessageBox::warning(this, "Ruta Cortada", "El camino entre los IDs seleccionados se anuló con éxito.");
 
+    actualizarAlertasReales();
+}
 // BOTÓN: MOSTRAR HISTORIAL
 
 void MainWindow::on_pushButton_4_clicked()
@@ -332,7 +453,7 @@ void MainWindow::on_pushButton_4_clicked()
         return;
     }
 
-    QString contenidoHistorial = "--- ÚLTIMOS VIAJES CONSULTADOS ---\n\n";
+    QString contenidoHistorial = "** ÚLTIMOS VIAJES CONSULTADOS **\n\n";
     std::string linea;
 
     // formato origen|destino|distancia
@@ -354,4 +475,47 @@ void MainWindow::on_pushButton_4_clicked()
 
     // Lo muesta en el cuadro de texto
     ui->textEditResultado->setText(contenidoHistorial);
+}
+
+void MainWindow::actualizarAlertasReales() {
+    ui->textBrowserAlertas->clear();
+
+    QString contenido = "<b>⚠️ ESTADO DE LA RED VIAL EN VIVO:</b><br><br>";
+    bool hayCortes = false;
+
+    // Lista fija de las conexiones originales del cargarMapaInicial()
+    // Para verificar si fueron cortadas en la matriz de adyacencia
+    struct Conexion { int orig; int dest; QString nombreOrig; QString nombreDest; };
+    Conexion rutasVerificar[] = {
+        {1, 0, "Carlos Paz", "Córdoba"},
+        {0, 2, "Córdoba", "Villa María"},
+        {0, 3, "Córdoba", "Bell Ville"},
+        {2, 3, "Villa María", "Bell Ville"},
+        {2, 4, "Villa María", "Río Cuarto"},
+        {4, 3, "Río Cuarto", "Bell Ville"},
+        {4, 1, "Río Cuarto", "Carlos Paz"},
+        {3, 5, "Bell Ville", "San Francisco"}
+    };
+
+    // se pide la matriz de adyacencia al grafo para revisar los estados
+    // y accede a getGrafo() que devuelve la referencia segura
+    auto& miGrafo = sistema.getGrafo();
+
+    for (const auto& ruta : rutasVerificar) {
+        //si existe un corte, el peso de la matriz se vuelve muy grande (infinito)
+        // entonces verificamos si la distancia actual es considerada inifinita
+        if (miGrafo.obtenerPeso(ruta.orig, ruta.dest) > 9999.0f) {
+            contenido += "<span style='color: #FF5555;'>• <b>CORTADA:</b></span> Conexión directa entre "
+                         + ruta.nombreOrig + " y " + ruta.nombreDest + "<br>";
+            hayCortes = true;
+        }
+    }
+
+    if (!hayCortes) {
+        contenido += "<span style='color: #55FF55;'>• <b>SISTEMA NORMAL:</b></span> Todas las rutas principales de la provincia se encuentran habilitadas.";
+    } else {
+        contenido += "<br><i style='color: #AAAAAA;'>Se recalculará el camino evitando los tramos en rojo.</i>";
+    }
+
+    ui->textBrowserAlertas->setHtml(contenido);
 }

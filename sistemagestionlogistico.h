@@ -34,14 +34,16 @@ public:
     void cargarMapaInicial();
 
     void agregarCiudad(std::string nombre, float x, float y);
+    void cargarCiudadDesdeArchivo(Ciudad ciudadAux);
     void agregarRuta(int origen, int destino, float km);
     void cortarRuta(int origen, int destino);
+
+    int getCantidadCiudades() { return cantidadCiudades; }
 
     ResultadoRuta calcularRutaOptima(int origen, int destino);
 
     std::string obtenerNombreCiudad(int id);
 
-    // NUEVO HISTORIAL
     void registrarHistorial(int origen, int destino, ResultadoRuta resultado);
     void guardarHistorial();
     void cargarHistorial();

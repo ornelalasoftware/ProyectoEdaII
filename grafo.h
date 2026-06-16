@@ -24,6 +24,10 @@ public:
 
     void agregarRuta(int origen, int destino, float km);
     void cortarRuta(int origen, int destino);
+    float obtenerPeso(int origen, int destino) { return matriz[origen][destino]; }
+    // Método "Getter" para encapsulamiento: Permite a la interfaz gráfica
+    // consultar los kilómetros (peso) entre dos ciudades de la matriz privada,
+    // sin alterar sus datos. Devuelve la distancia real o INF si la ruta está cortada.
 
     ResultadoRuta calcularDijkstra(int inicio, int fin);
 };

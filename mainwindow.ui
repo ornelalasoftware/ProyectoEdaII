@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
-      <width>801</width>
-      <height>591</height>
+      <y>-10</y>
+      <width>861</width>
+      <height>601</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -30,19 +30,6 @@
      <string notr="true">background-color: #111E2A;
 border-radius: 15px;</string>
     </property>
-    <widget class="QListWidget" name="listWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>141</width>
-       <height>491</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: #172835;</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
@@ -122,10 +109,10 @@ border-radius: 10px;</string>
     <widget class="QWidget" name="widget_2" native="true">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>50</y>
-       <width>651</width>
-       <height>491</height>
+       <x>140</x>
+       <y>30</y>
+       <width>711</width>
+       <height>551</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -135,10 +122,10 @@ border: rounded;</string>
      <widget class="QWidget" name="widget_3" native="true">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>40</y>
+        <x>10</x>
+        <y>30</y>
         <width>461</width>
-        <height>91</height>
+        <height>71</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -150,8 +137,8 @@ border-radius: 15px;</string>
       <widget class="QToolButton" name="ButtonCiudadOrigen">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>40</y>
+         <x>20</x>
+         <y>30</y>
          <width>131</width>
          <height>31</height>
         </rect>
@@ -177,8 +164,8 @@ padding: 5px;</string>
         <rect>
          <x>20</x>
          <y>10</y>
-         <width>81</width>
-         <height>31</height>
+         <width>71</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -198,7 +185,7 @@ color: black;
          <x>160</x>
          <y>10</y>
          <width>81</width>
-         <height>31</height>
+         <height>21</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -215,8 +202,8 @@ color: black;
       <widget class="QPushButton" name="pushButton_5">
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>30</y>
+         <x>310</x>
+         <y>20</y>
          <width>121</width>
          <height>41</height>
         </rect>
@@ -238,7 +225,7 @@ padding: 5px;</string>
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>40</y>
+         <y>30</y>
          <width>131</width>
          <height>31</height>
         </rect>
@@ -263,8 +250,8 @@ padding: 5px;</string>
      <widget class="QTextEdit" name="textEdit">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>10</y>
+        <x>10</x>
+        <y>0</y>
         <width>321</width>
         <height>31</height>
        </rect>
@@ -284,19 +271,19 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>130</y>
-        <width>491</width>
-        <height>341</height>
+        <y>100</y>
+        <width>451</width>
+        <height>371</height>
        </rect>
       </property>
      </widget>
      <widget class="QTextEdit" name="textEditResultado">
       <property name="geometry">
        <rect>
-        <x>540</x>
-        <y>130</y>
-        <width>111</width>
-        <height>341</height>
+        <x>500</x>
+        <y>30</y>
+        <width>151</width>
+        <height>401</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -307,6 +294,27 @@ border-radius: 15px;</string>
       </property>
       <property name="readOnly">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowserAlertas">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>441</y>
+        <width>641</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTextBrowser {
+    background-color: #1A1D24; /* El gris oscuro que combina con tu fondo */
+    color: #EAEAEA;            /* Letras claras y legibles */
+    border: 1px solid #3B4252; /* Un borde sutil para que encuadre bien */
+    border-radius: 8px;        /* Bordes redondeados estéticos */
+    padding: 8px;              /* Espaciado interno para que el texto respire */
+    font-family: 'Segoe UI';
+    font-size: 10px;
+}</string>
       </property>
      </widget>
     </widget>

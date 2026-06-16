@@ -1,4 +1,0 @@
-Villa Carlos Paz|San Francisco|430
-Villa Carlos Paz|Bell Ville|235
-Villa Carlos Paz|Rio Cuarto|215
-Villa Maria|San Francisco|258
